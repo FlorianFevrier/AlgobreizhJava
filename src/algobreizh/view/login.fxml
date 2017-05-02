@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="390.0" styleClass="background" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algobreizh.view.LoginController">
+   <children>
+      <AnchorPane layoutX="82.0" layoutY="69.0" prefHeight="186.0" prefWidth="390.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutX="50.0" prefHeight="300.0" prefWidth="421.0" spacing="5.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="180.0" prefWidth="430.0">
+                     <children>
+                        <TextField fx:id="userid" layoutX="10.0" layoutY="64.0" prefHeight="26.0" prefWidth="301.0" styleClass="textview" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding></TextField>
+                        <PasswordField fx:id="password" layoutX="10.0" layoutY="121.0" prefHeight="26.0" prefWidth="372.0" styleClass="textview" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding></PasswordField>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button fx:id="login" layoutX="40.0" layoutY="212.0" mnemonicParsing="false" onAction="#processLogin" prefHeight="38.0" prefWidth="310.0" text="Connexion" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
+      <HBox layoutX="40.0" layoutY="177.0" prefHeight="25.0" prefWidth="418.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+         <children>
+            <Label fx:id="errorMessage" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
