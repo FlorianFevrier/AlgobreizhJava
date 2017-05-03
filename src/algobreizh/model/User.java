@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
  * @author florian
  */
 public class User {
+    //email, nom, zone et id du commercial
     private String email;
     private String nom;
     private String zone;
@@ -39,8 +40,8 @@ public class User {
     private void getInfo(){
         try {    
             recupInfoCommercial();
-            recupListeRendezVous();      
             recupClient();
+            recupListeRendezVous();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,11 +102,12 @@ public class User {
     //Recupere la liste des rendez vous 
     private void recupListeRendezVous(){
         try {
-            PreparedStatement rendezVousStatement = ConnectionBd.getInstance().prepareStatement("SELECT rendezVous.date AS dateRdv, client.nom AS clientRdv FROM rendezVous INNER JOIN client ON rendezVous.idClient = client.idClient");
+            PreparedStatement rendezVousStatement = ConnectionBd.getInstance().prepareStatement("SELECT rendezVous.date AS dateRdv, rendezVous.heureDebut AS heureDebut, rendezVous.heureFin AS heureFin, client.nom AS clientRdv FROM rendezVous INNER JOIN client ON rendezVous.idClient = client.idClient WHERE rendezVous.idCommercial = ?");
+            rendezVousStatement.setInt(1, this.id);
             ResultSet resultRendezVous = rendezVousStatement.executeQuery();
             
             while ( resultRendezVous.next() ) {
-                rendezVous.add(new RendezVous(resultRendezVous.getString("dateRdv"), resultRendezVous.getString("clientRdv")));
+                rendezVous.add(new RendezVous(resultRendezVous.getString("dateRdv"), resultRendezVous.getString("heureDebut"), resultRendezVous.getString("heureFin"), resultRendezVous.getString("clientRdv")));
             }
             rendezVousStatement.close();
             resultRendezVous.close();
@@ -124,9 +126,11 @@ public class User {
             while ( result.next() ) {
                 //Recupere la liste de toute les visite du client et la stock dans temporairement dans listevisite
                 //en attendants d'etre passé en parametre lors de l'ajout d'un client
-                PreparedStatement visiteStatement = ConnectionBd.getInstance().prepareStatement("SELECT dateVisite AS dateVisite FROM visite WHERE idCommercial = ? ORDER BY dateVisite");
+                PreparedStatement visiteStatement = ConnectionBd.getInstance().prepareStatement("SELECT dateVisite AS dateVisite FROM visite WHERE idClient = ? ORDER BY dateVisite");
                 visiteStatement.setString( 1, result.getString("id"));
+                //Execute la requete
                 ResultSet visiteResult = visiteStatement.executeQuery();
+                //Ajout les visites dans une liste
                 while(visiteResult.next()){
                     listeVisite.add(visiteResult.getString("dateVisite"));
                 }

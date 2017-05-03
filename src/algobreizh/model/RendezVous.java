@@ -15,22 +15,27 @@ import javafx.beans.property.StringProperty;
 public class RendezVous {
     private final StringProperty date;
     private final StringProperty nomClient;
+    private final StringProperty heureDebut;
+    private final StringProperty heureFin;
     
     
     public RendezVous(){
-       this(null, null);
+       this(null, null, null, null);
     }
     
-    public RendezVous(String date, String nomClient){
+    public RendezVous(String date, String heureDebut, String heureFin,String nomClient){
         this.date = new SimpleStringProperty(date);
+        this.heureDebut = new SimpleStringProperty(heureDebut);
+        this.heureFin = new SimpleStringProperty(heureFin);
         this.nomClient = new SimpleStringProperty(nomClient);
     }
     
+    //Accesseur Date
     public String getDate(){
         return date.get();
     }
     
-    public void setNomClient(String date){
+    public void setDate(String date){
         this.date.set(date);
     }
     
@@ -38,6 +43,7 @@ public class RendezVous {
         return date;
     }
     
+    //Acesseur nom
     public String getnomClient(){
         return nomClient.get();
     }
@@ -48,5 +54,31 @@ public class RendezVous {
     
     public StringProperty nomClientProperty(){
         return nomClient;
+    }
+    
+    //Accesseur Heure de debut
+    public String heureDebut(){
+        return heureDebut.get();
+    }
+    
+    public void setheureDebut(String heureDebut){
+        this.heureDebut.set(heureDebut);
+    }
+    
+    public StringProperty heureDebutProperty(){
+        return heureDebut;
+    }
+    
+    //Accesseur Heure de Fin
+    public String heureFin(){
+        return heureFin.get();
+    }
+    
+    public void setheureFin(String heureFin){
+        this.heureFin.set(heureFin);
+    }
+    
+    public StringProperty heureFinProperty(){
+        return heureFin;
     }
 }

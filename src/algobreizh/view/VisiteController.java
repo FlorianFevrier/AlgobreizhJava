@@ -8,6 +8,7 @@ package algobreizh.view;
 import algobreizh.Main;
 import algobreizh.model.User;
 import algobreizh.model.Client;
+import algobreizh.model.RendezVous;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +25,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import jfxtras.scene.control.CalendarTimeTextField;
-import jfxtras.scene.control.agenda.Agenda;
 
 /**
  * FXML Controller class
@@ -58,7 +58,7 @@ public class VisiteController implements Initializable {
     private TableColumn<Client, String> nomClientColumn;
     
     //tableau des rendez vous
-    /*@FXML
+    @FXML
     private TableView<RendezVous> rendezVousTable;
     
     @FXML
@@ -66,7 +66,13 @@ public class VisiteController implements Initializable {
     
     @FXML
     private TableColumn<RendezVous, String> nomClientRendezVousColumn;
-    */
+    
+    @FXML
+    private TableColumn<RendezVous, String> heureDebutColumn;
+    
+    @FXML
+    private TableColumn<RendezVous, String> heureFinColumn;
+    
     @FXML
     private ListView<String> listView= new ListView(); 
     
@@ -90,15 +96,9 @@ public class VisiteController implements Initializable {
     
     @FXML
     private TextField clientRdv;
-    
-    @FXML
-    private Agenda agenda;
             
     private Main application;
     private int idClient;
-    
-    ArrayList minute = new ArrayList();
-    ArrayList heure = new ArrayList();
     
     public void setApp(Main application){
         this.application = application;
@@ -112,7 +112,7 @@ public class VisiteController implements Initializable {
         visteTable.setItems(loggedUser.getPersonData());
         
         //Remplie le tableau des rendez vous
-        //rendezVousTable.setItems(loggedUser.getrendezVous());
+        rendezVousTable.setItems(loggedUser.getrendezVous());
     }
     
     /**
@@ -123,8 +123,10 @@ public class VisiteController implements Initializable {
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         nomClientColumn.setCellValueFactory(cellData -> cellData.getValue().nomClientProperty());
         
-        //dateRendezVousColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        //nomClientRendezVousColumn.setCellValueFactory(cellData -> cellData.getValue().nomClientProperty());
+        dateRendezVousColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        nomClientRendezVousColumn.setCellValueFactory(cellData -> cellData.getValue().nomClientProperty());
+        heureDebutColumn.setCellValueFactory(cellData -> cellData.getValue().heureDebutProperty());
+        heureFinColumn.setCellValueFactory(cellData -> cellData.getValue().heureFinProperty());
         
         // Clear client details.
         showClientDetails(null);
@@ -216,7 +218,7 @@ public class VisiteController implements Initializable {
                       
             loggedUser.setRendezVous(idUser, idClientR, lieu.getText(), comment.getText(), contact.getText(), dateR, heureD, heureF);
             //rafraichie la liste des rendez-vous
-            //rendezVousTable.setItems(loggedUser.getNewrendezVous());
+            rendezVousTable.setItems(loggedUser.getNewrendezVous());
         }
     }
     

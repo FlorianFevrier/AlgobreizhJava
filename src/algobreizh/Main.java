@@ -111,7 +111,7 @@ public class Main extends Application {
         return (Initializable) loader.getController();
     }
     
-        private Initializable replaceSceneContentVisite(String fxml) throws Exception {
+    private Initializable replaceSceneContentVisite(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -129,7 +129,7 @@ public class Main extends Application {
         ft.setToValue(1.0);
         ft.play();
         
-        Scene scene = new Scene(page, 1080, 720);
+        Scene scene = new Scene(page, 1200, 600);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setResizable(true);
