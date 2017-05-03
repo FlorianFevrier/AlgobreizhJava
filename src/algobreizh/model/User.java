@@ -7,7 +7,6 @@ package algobreizh.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,10 +47,10 @@ public class User {
     }
     
     //enregistre un rendez-vous dans la base de donnée
-    public void setRendezVous(String idCommercial, String idClient, String lieu, String commentaire, String contact, String heure){
+    public void setRendezVous(String idCommercial, String idClient, String lieu, String commentaire, String contact, String dateRdv, String heureD, String heureF){
         try {
             /* Création de l'objet gérant les requêtes */
-            PreparedStatement preparedStatement = ConnectionBd.getInstance().prepareStatement( "INSERT INTO `algobreizh`.`rendezVous` (`idCommercial`, `idClient`, `lieu`, `commentaire`, `personne`, `date`) VALUES (?, ?, ?, ?, ?, ?);" );
+            PreparedStatement preparedStatement = ConnectionBd.getInstance().prepareStatement( "INSERT INTO `algobreizh`.`rendezVous` (`idCommercial`, `idClient`, `lieu`, `commentaire`, `personne`, `date`, `heureDebut`, `heureFin`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);" );
             //Remplissage des paramètres de la requête
             preparedStatement.setString( 1, idCommercial);
             preparedStatement.setString( 2, idClient);
@@ -59,9 +58,16 @@ public class User {
             preparedStatement.setString( 4, commentaire);
             preparedStatement.setString( 5, contact);
             //Parse la date pour l'insertion dans la bd
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = format.parse(heure);           
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = format.parse(dateRdv);           
             preparedStatement.setTimestamp(6, new java.sql.Timestamp(date.getTime()));
+            //Parse l'heure de debut
+            SimpleDateFormat formatHeure = new SimpleDateFormat("HH:mm");
+            Date heureDebut = formatHeure.parse(heureD);
+            preparedStatement.setTimestamp(7, new java.sql.Timestamp(heureDebut.getTime()));
+            //Parse l'heure de fin
+            Date heureFin = formatHeure.parse(heureF);
+            preparedStatement.setTimestamp(8, new java.sql.Timestamp(heureFin.getTime()));
             //execute la requete
             int result = preparedStatement.executeUpdate();
         } catch (Exception e) {

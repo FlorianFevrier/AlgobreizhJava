@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -14,10 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import jfxtras.scene.control.agenda.Agenda?>
+<?import jfxtras.scene.control.CalendarTimeTextField?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1275.0" stylesheets="@Visite.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algobreizh.view.VisiteController">
    <top>
@@ -53,57 +49,35 @@
       </TableView>
    </left>
    <center>
-      <AnchorPane prefHeight="685.0" prefWidth="436.0" BorderPane.alignment="TOP_LEFT">
+      <AnchorPane prefHeight="686.0" prefWidth="554.0" BorderPane.alignment="TOP_LEFT">
          <children>
-            <GridPane layoutX="9.0" layoutY="41.0" prefHeight="221.0" prefWidth="277.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.0" minWidth="10.0" prefWidth="131.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="738.0" minWidth="10.0" prefWidth="146.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label styleClass="label-header" text="Info Client" GridPane.rowIndex="4" />
-                  <Label text="Nom" GridPane.rowIndex="5" />
-                  <Label text="Ville" GridPane.rowIndex="6" />
-                  <Label text="Telephone" GridPane.rowIndex="7" />
-                  <Label fx:id="nomClient" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label fx:id="villeClient" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="telClient" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label prefWidth="146.0" styleClass="label-header" text="Info Commercial" />
-                  <Label text="Nom" GridPane.rowIndex="1" />
-                  <Label fx:id="nomCommercial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Zone" GridPane.rowIndex="2" />
-                  <Label fx:id="zoneCommercial" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-            <Label layoutX="14.0" layoutY="311.0" text="Derniere Visite" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="250.0" />
-            <ListView fx:id="listView" layoutX="14.0" layoutY="404.0" prefHeight="44.0" prefWidth="176.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="280.0" />
-            <Label layoutX="1.0" layoutY="330.0" prefHeight="21.0" prefWidth="216.0" styleClass="label-header-center" text="Prendre Rendez vous" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="330.0" />
-            <DatePicker fx:id="dateRdv" layoutX="13.0" layoutY="366.0" prefHeight="30.0" prefWidth="200.0" promptText="Date" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="366.0" />
-            <ComboBox fx:id="heureRdv" layoutX="19.0" layoutY="405.0" prefHeight="30.0" prefWidth="90.0" promptText="Heure" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="405.0" />
-            <ComboBox fx:id="minuteRdv" layoutX="113.0" layoutY="405.0" prefHeight="30.0" prefWidth="90.0" promptText="Minute" AnchorPane.leftAnchor="113.0" AnchorPane.topAnchor="405.0" />
-            <TextField fx:id="clientRdv" layoutX="14.0" layoutY="450.0" promptText="Client" styleClass="textview" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="450.0" />
-            <TextField fx:id="lieu" layoutX="13.0" layoutY="492.0" prefWidth="200.0" promptText="Location" styleClass="textview" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="492.0" />
-            <TextField fx:id="contact" layoutX="13.0" layoutY="530.0" prefWidth="200.0" promptText="Personne a contacter" styleClass="textview" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="530.0" />
-            <TextArea fx:id="comment" layoutX="13.0" layoutY="577.0" prefHeight="36.0" prefWidth="200.0" promptText="Commentaire" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="577.0" />
-            <Button layoutX="19.0" layoutY="631.0" mnemonicParsing="false" onAction="#creezRendezVous" prefHeight="30.0" prefWidth="200.0" text="Creez Un Rendez-vous" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="631.0" />
+            <Label layoutX="7.0" layoutY="30.0" prefHeight="21.0" prefWidth="163.0" styleClass="label-header" text="Info Commercial" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+            <Label layoutX="19.0" layoutY="61.0" text="Nom :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="nomCommercial" layoutX="71.0" layoutY="61.0" prefHeight="19.0" prefWidth="140.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="18.0" layoutY="88.0" text="Zone :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0" />
+            <Label layoutX="20.0" layoutY="152.0" styleClass="label-header" text="Info Client" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0" />
+            <Label layoutX="18.0" layoutY="193.0" text="Nom :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="150.0" />
+            <Label fx:id="nomClient" layoutX="76.0" layoutY="193.0" prefHeight="19.0" prefWidth="92.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="150.0" />
+            <Label layoutX="17.0" layoutY="224.0" text="Ville :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0" />
+            <Label fx:id="villeClient" layoutX="80.0" layoutY="224.0" prefHeight="19.0" prefWidth="107.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="180.0" />
+            <Label layoutX="18.0" layoutY="260.0" text="Telephone :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="210.0" />
+            <Label fx:id="telClient" layoutX="121.0" layoutY="260.0" prefHeight="19.0" prefWidth="52.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="210.0" />
+            <Label fx:id="zoneCommercial" layoutX="71.0" layoutY="88.0" prefHeight="19.0" prefWidth="82.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="80.0" />
+            <Label layoutX="16.0" layoutY="248.0" text="Historique de visite du client :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="240.0" />
+            <ListView fx:id="listView" layoutX="13.0" layoutY="275.0" prefHeight="149.0" prefWidth="219.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="270.0" />
+            <Label layoutX="270.0" layoutY="20.0" prefHeight="21.0" prefWidth="213.0" styleClass="label-header" text="Prendre Rendez vous" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
+            <DatePicker fx:id="dateRdv" layoutX="268.0" layoutY="107.0" prefHeight="30.0" prefWidth="200.0" promptText="Date" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="50.0" />
+            <TextField fx:id="clientRdv" layoutX="270.0" layoutY="227.0" promptText="Client" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="200.0" />
+            <TextField fx:id="lieu" layoutX="270.0" layoutY="269.0" prefWidth="200.0" promptText="Location" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="250.0" />
+            <TextField fx:id="contact" layoutX="270.0" layoutY="307.0" prefWidth="200.0" promptText="Personne a contacter" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="300.0" />
+            <TextArea fx:id="comment" layoutX="270.0" layoutY="354.0" prefHeight="69.0" prefWidth="200.0" promptText="Commentaire" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="350.0" />
+            <Button layoutX="270.0" layoutY="408.0" mnemonicParsing="false" onAction="#creezRendezVous" prefHeight="30.0" prefWidth="200.0" text="Creez Un Rendez-vous" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="430.0" />
+            <CalendarTimeTextField fx:id="heureDebut" layoutX="268.0" layoutY="149.0" prefHeight="26.0" prefWidth="0.0" promptText="De" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="100.0" />
+            <CalendarTimeTextField fx:id="heureFin" layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="81.0" promptText="A" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0" />
          </children>
       </AnchorPane>
    </center>
    <right>
-      <AnchorPane prefHeight="685.0" prefWidth="794.0" BorderPane.alignment="CENTER">
-         <children>
-            <Agenda fx:id="agenda" layoutX="13.0" layoutY="-173.0" prefHeight="685.0" prefWidth="794.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
-         </children></AnchorPane>
+      <AnchorPane prefHeight="686.0" prefWidth="495.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

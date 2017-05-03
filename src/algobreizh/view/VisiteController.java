@@ -8,16 +8,14 @@ package algobreizh.view;
 import algobreizh.Main;
 import algobreizh.model.User;
 import algobreizh.model.Client;
-import algobreizh.model.RendezVous;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -25,7 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import jfxtras.scene.control.CalendarTimeTextField;
 import jfxtras.scene.control.agenda.Agenda;
 
 /**
@@ -82,10 +80,10 @@ public class VisiteController implements Initializable {
     private DatePicker dateRdv;
     
     @FXML
-    private ComboBox heureRdv;
+    private CalendarTimeTextField heureDebut;
     
     @FXML
-    private ComboBox minuteRdv;
+    private CalendarTimeTextField heureFin;
     
     @FXML
     private TextArea comment;
@@ -115,17 +113,6 @@ public class VisiteController implements Initializable {
         
         //Remplie le tableau des rendez vous
         //rendezVousTable.setItems(loggedUser.getrendezVous());
-        
-        //Remplie les heures disponible pour prendre rendez-vous
-        for (int i = 8; i < 19; i++) {
-            heure.add(String.format("%02d", i));
-        }
-        heureRdv.getItems().addAll(heure);
-        
-        for (int i = 0; i < 60; i++) {
-            minute.add(String.format("%02d", i));
-        }
-        minuteRdv.getItems().addAll(minute);
     }
     
     /**
@@ -148,27 +135,27 @@ public class VisiteController implements Initializable {
     }    
     
     private void showClientDetails(Client client) {
-    if (client != null) {
-        // Remplie les labels et la liste avec les information clients
-        nomClient.setText(client.getnomClient());
-        villeClient.setText(client.getaddresse());
-        telClient.setText(client.gettel());
-        listView.getItems().clear();
-        listView.getItems().addAll(client.listVisiteProperty());
-        //pre-remplie les info du client pour la prise de rendez-vous
-        lieu.setText(client.getaddresse());  
-        clientRdv.setText(client.getnomClient());
-        //Stock l'id du client selectionné
-        this.idClient = client.getId();
-    } else {
-        nomClient.setText("");
-        villeClient.setText("");
-        telClient.setText("");
-        listView.getItems().clear();
-        lieu.setText("");
-        clientRdv.setText("");
-        this.idClient = 0;
-    }
+        if (client != null) {
+            // Remplie les labels et la liste avec les information clients
+            nomClient.setText(client.getnomClient());
+            villeClient.setText(client.getaddresse());
+            telClient.setText(client.gettel());
+            listView.getItems().clear();
+            listView.getItems().addAll(client.listVisiteProperty());
+            //pre-remplie les info du client pour la prise de rendez-vous
+            lieu.setText(client.getaddresse());  
+            clientRdv.setText(client.getnomClient());
+            //Stock l'id du client selectionné
+            this.idClient = client.getId();
+        } else {
+            nomClient.setText("");
+            villeClient.setText("");
+            telClient.setText("");
+            listView.getItems().clear();
+            lieu.setText("");
+            clientRdv.setText("");
+            this.idClient = 0;
+        }
     }
     
     public void creezRendezVous(){
@@ -186,11 +173,7 @@ public class VisiteController implements Initializable {
             showAlert("Vous devez choisir une date");
             inputValid = false;
         }
-        
-        if(heureRdv.getValue() == null && minuteRdv.getValue() == null){
-            showAlert("Vous devez selectionnez une heure");
-            inputValid = false;
-        }
+ 
         
         if(lieu.getText() == null || lieu.getText().trim().isEmpty()){
             showAlert("Vous devez entrez un lieu");
@@ -202,9 +185,36 @@ public class VisiteController implements Initializable {
             inputValid = false;
         }
         
+        if(heureDebut.getCalendar() == null){
+            showAlert("Vous devez renseignez l'heure");
+            inputValid = false;
+        }
+        
+        if(heureFin.getCalendar() == null){
+            showAlert("Vous devez renseignez l'heure");
+            inputValid = false; 
+        }
+ 
+        if(heureDebut.getCalendar().get(Calendar.HOUR_OF_DAY) >= heureFin.getCalendar().get(Calendar.HOUR_OF_DAY)){
+            if(heureDebut.getCalendar().get(Calendar.MINUTE) >= heureFin.getCalendar().get(Calendar.MINUTE)){
+                showAlert("L'heure de fin ne peut pas etre infèrieur a l'heure de fin");
+                inputValid = false; 
+            }
+        }
+        
+        //TODO
+        //Regarder si l'heure de debut est inferieur a l'heure de fin
+        //regarder si l'heure de rendez vous n'est pas deja rentrez 
+        
         if(inputValid){
-            String heure = dateRdv.getValue().toString() + " " + heureRdv.getValue().toString() + ":" + minuteRdv.getValue().toString();
-            loggedUser.setRendezVous(Integer.toString(loggedUser.getidUSer()), Integer.toString(this.idClient), lieu.getText(), comment.getText(), contact.getText(), heure);
+            System.out.println("valid");
+            String idUser = Integer.toString(loggedUser.getidUSer());
+            String idClientR = Integer.toString(this.idClient);
+            String dateR = dateRdv.getValue().toString();
+            String heureD = heureDebut.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + heureDebut.getCalendar().get(Calendar.MINUTE);
+            String heureF = heureFin.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + heureFin.getCalendar().get(Calendar.MINUTE);
+                      
+            loggedUser.setRendezVous(idUser, idClientR, lieu.getText(), comment.getText(), contact.getText(), dateR, heureD, heureF);
             //rafraichie la liste des rendez-vous
             //rendezVousTable.setItems(loggedUser.getNewrendezVous());
         }
