@@ -10,9 +10,9 @@ import algobreizh.model.User;
 import algobreizh.model.Client;
 import algobreizh.model.RendezVous;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -229,5 +229,20 @@ public class VisiteController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+    public void processLogout(ActionEvent event) {
+        if (application == null){
+            // We are running in isolated FXML, possibly in Scene Builder.
+            // NO-OP.
+            return;
+        }
+        application.userLogout();
+       }
+    
+    //Quitte L'application
+    @FXML
+    private void handleExit() {
+        System.exit(0);
     }
 }

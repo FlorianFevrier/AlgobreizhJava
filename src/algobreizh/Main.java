@@ -60,7 +60,6 @@ public class Main extends Application {
     public boolean userLogging(String userId, String password){
         if (Authenticator.connexion(userId, password)) {//Utilise le modele Authenticator pour verifier si le login est bon
             loggedUser = new User(userId);//Stock un object User dans loggedUser
-           // gotoProfile();//Si le login est bon on affiche la scene Profile
             gotoVisite();
             return true;
         } else {
@@ -139,8 +138,8 @@ public class Main extends Application {
         return loggedUser;
     }
 
-    //Méthode appelée par ProfileController pour se deconnecter
-    void userLogout() {
+    //Méthode appelée pour se deconnecter
+    public void userLogout() {
         loggedUser = null;
         gotoLogin();
     }
