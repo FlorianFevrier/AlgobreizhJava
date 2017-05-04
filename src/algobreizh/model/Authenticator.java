@@ -19,11 +19,12 @@ public class Authenticator {
     public static boolean connexion(String user, String password){
         try {
             /* Création de l'objet gérant les requêtes */
-            PreparedStatement preparedStatement = ConnectionBd.getInstance().prepareStatement( "SELECT mail FROM commercial WHERE mail = ?;" );
+            PreparedStatement preparedStatement = ConnectionBd.getInstance().prepareStatement( "SELECT mail FROM utilisateur WHERE mail = ? AND mdp = MD5(?);");
             //Remplissage des paramètres de la requête
-            preparedStatement.setString( 1, user);
-          
-           ResultSet result = preparedStatement.executeQuery();
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, password);
+            
+            ResultSet result = preparedStatement.executeQuery();
             
             while ( result.next() ) {
                 email = result.getString( "mail" );

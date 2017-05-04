@@ -12,16 +12,16 @@ import algobreizh.model.User;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  *
@@ -89,6 +89,7 @@ public class Main extends Application {
     
     //remplace une scene par une autre
     private Initializable replaceSceneContent(String fxml) throws Exception {
+        //Charge le fichier XML
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -99,19 +100,17 @@ public class Main extends Application {
         } finally {
             in.close();
         } 
-        //Effet de transition en dégradée
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), page);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.play();
-
+        
+        //Ajoute la scene a la fenetre
         Scene scene = new Scene(page, 390, 300);
         stage.setScene(scene);
         stage.sizeToScene();
+        
         return (Initializable) loader.getController();
     }
     
     private Initializable replaceSceneContentVisite(String fxml) throws Exception {
+        //Charge le fichier XML
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -123,16 +122,16 @@ public class Main extends Application {
             in.close();
         } 
   
-        //Effet de transition
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), page);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.play();
-        
-        Scene scene = new Scene(page, 1200, 600);
+        //Ajoute la scene a la fenetre
+        Scene scene = new Scene(page, 1180, 600);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setResizable(true);
+        //Centre la fenetre
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+        
         return (Initializable) loader.getController();
     }
 

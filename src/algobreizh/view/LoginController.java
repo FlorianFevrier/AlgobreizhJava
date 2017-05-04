@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
             errorMessage.setText("error");
         } else {
             if (!application.userLogging(userid.getText(), password.getText())){//Appele la méthode userLoggin du main
-                errorMessage.setText("Username/Password is incorrect");
+                errorMessage.setText("Utilisateur/Mot de passe incorrect");
             } 
         }
     }

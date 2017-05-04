@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import jfxtras.scene.control.CalendarTimeTextField?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@Visite.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algobreizh.view.VisiteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1180.0" stylesheets="@Visite.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algobreizh.view.VisiteController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -49,7 +49,7 @@
       </TableView>
    </left>
    <center>
-      <AnchorPane prefHeight="686.0" prefWidth="554.0" BorderPane.alignment="TOP_LEFT">
+      <AnchorPane prefHeight="566.0" prefWidth="524.0" BorderPane.alignment="TOP_LEFT">
          <children>
             <Label layoutX="7.0" layoutY="30.0" prefHeight="21.0" prefWidth="163.0" styleClass="label-header" text="Info Commercial" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
             <Label layoutX="19.0" layoutY="61.0" text="Nom :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
@@ -66,21 +66,21 @@
             <Label layoutX="16.0" layoutY="248.0" text="Historique de visite du client :" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="240.0" />
             <ListView fx:id="listView" layoutX="13.0" layoutY="275.0" prefHeight="196.0" prefWidth="219.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="270.0" />
             <Label layoutX="270.0" layoutY="20.0" prefHeight="21.0" prefWidth="213.0" styleClass="label-header" text="Prendre Rendez vous" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
-            <DatePicker fx:id="dateRdv" layoutX="268.0" layoutY="107.0" prefHeight="30.0" prefWidth="200.0" promptText="Date" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="50.0" />
             <TextField fx:id="clientRdv" layoutX="270.0" layoutY="227.0" promptText="Client" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="200.0" />
             <TextField fx:id="lieu" layoutX="270.0" layoutY="269.0" prefWidth="200.0" promptText="Location" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="250.0" />
             <TextField fx:id="contact" layoutX="270.0" layoutY="307.0" prefWidth="200.0" promptText="Personne a contacter" styleClass="textview" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="300.0" />
             <TextArea fx:id="comment" layoutX="270.0" layoutY="354.0" prefHeight="69.0" prefWidth="200.0" promptText="Commentaire" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="350.0" />
             <Button layoutX="270.0" layoutY="408.0" mnemonicParsing="false" onAction="#creezRendezVous" prefHeight="30.0" prefWidth="200.0" text="Creez Un Rendez-vous" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="430.0" />
-            <CalendarTimeTextField fx:id="heureDebut" layoutX="268.0" layoutY="149.0" prefHeight="26.0" prefWidth="0.0" promptText="De" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="100.0" />
+            <CalendarTimeTextField fx:id="heureDebut" layoutX="268.0" layoutY="149.0" prefHeight="26.0" prefWidth="0.0" promptText="De" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="110.0" />
             <CalendarTimeTextField fx:id="heureFin" layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="81.0" promptText="A" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0" />
+            <DatePicker fx:id="dateRdv" layoutX="329.0" layoutY="57.0" prefHeight="30.0" prefWidth="200.0" promptText="Date" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
    </center>
    <right>
-      <AnchorPane prefHeight="686.0" prefWidth="495.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="566.0" prefWidth="417.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="rendezVousTable" layoutX="90.0" layoutY="58.0" prefHeight="410.0" prefWidth="360.0">
+            <TableView fx:id="rendezVousTable" layoutX="38.0" layoutY="58.0" prefHeight="410.0" prefWidth="360.0">
               <columns>
                 <TableColumn fx:id="dateRendezVousColumn" prefWidth="100.0" text="Date" />
                 <TableColumn fx:id="heureDebutColumn" prefWidth="70.0" text="De" />
@@ -88,7 +88,7 @@
                   <TableColumn fx:id="nomClientRendezVousColumn" prefWidth="110.0" text="Client" />
               </columns>
             </TableView>
-            <Label layoutX="88.0" layoutY="21.0" styleClass="label-header" text="Liste des Rendez-Vous" AnchorPane.topAnchor="21.0" />
+            <Label layoutX="98.0" layoutY="30.0" styleClass="label-header" text="Liste des Rendez-Vous" AnchorPane.topAnchor="20.0" />
          </children></AnchorPane>
    </right>
 </BorderPane>
