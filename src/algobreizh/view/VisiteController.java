@@ -28,7 +28,8 @@ import jfxtras.scene.control.CalendarTimeTextField;
 
 /**
  * FXML Controller class
- *
+ * Le controlleur de la scene visite 
+ * 
  * @author florian
  */
 public class VisiteController implements Initializable {
@@ -222,7 +223,12 @@ public class VisiteController implements Initializable {
         }
     }
     
-    //Affiche une fenetre d'erreur
+    /**
+     * Affiche un message d'erreur dans une fenetre de dialogue
+     * 
+     * @param message
+     *             Le message a afficher
+     */
     private void showAlert(String message){
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Erreur");
@@ -231,16 +237,22 @@ public class VisiteController implements Initializable {
         alert.showAndWait();
     }
     
+    /**
+     * Se deconnecte de l'application 
+     * 
+     * @param event
+     * @see Main#userLogout() 
+     */
     public void processLogout(ActionEvent event) {
         if (application == null){
-            // We are running in isolated FXML, possibly in Scene Builder.
-            // NO-OP.
             return;
         }
         application.userLogout();
-       }
+    }
     
-    //Quitte L'application
+    /**
+     * Ferme l'application
+     */
     @FXML
     private void handleExit() {
         System.exit(0);

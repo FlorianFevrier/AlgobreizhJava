@@ -18,30 +18,54 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
- *
+ * Le controlleur de la scene login
+ * 
  * @author florian
  */
 public class LoginController implements Initializable {
-
+    /**
+     * La zone de texte ou l'utilisateur rentre son e-mail
+     */
     @FXML
     TextField userid;
     
+    /**
+     * La zone de texte ou l'utilisateur rentre son mot de passe
+     */
     @FXML
     PasswordField password;
     
+    /**
+     * Le bouton qui va appeler la methode processLogin
+     * 
+     * @see LoginController#processLogin(javafx.event.ActionEvent) 
+     */
     @FXML
     Button login;
     
+    /**
+     * Le Label qui sert a afficher un message en cas d'erreur
+     * lors de la connexion
+     */
     @FXML
     Label errorMessage;
     
+    /**
+     * Reference to the main application.
+     */
     private Main application;
     
+    /**
+     * Is called by the main application to give a reference back to itself.
+     * 
+     * @param application
+     */
     public void setApp(Main application){
         this.application = application;
     }
+    
     /**
-     * Initializes the controller class.
+     * Initialise le contrôleur.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,12 +74,19 @@ public class LoginController implements Initializable {
         password.setPromptText("Password");
     }
     
-    //methode appelée quand on click sur le bouton login
+    /**
+     * Action qui se produit quand on clic sur le bouton login.
+     * Affiche un message d'erreur si les identifiants entrées sont valides
+     * 
+     * @see Main#userLogging(java.lang.String, java.lang.String)
+     * @see LoginController#errorMessage
+     * 
+     */
     public void processLogin(ActionEvent event){
         if (application == null){
             errorMessage.setText("error");
         } else {
-            if (!application.userLogging(userid.getText(), password.getText())){//Appele la méthode userLoggin du main
+            if (!application.userLogging(userid.getText(), password.getText())){
                 errorMessage.setText("Utilisateur/Mot de passe incorrect");
             } 
         }

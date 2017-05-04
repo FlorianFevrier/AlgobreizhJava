@@ -28,12 +28,27 @@ import javafx.stage.Stage;
  * @author florian
  */
 public class Main extends Application {
-    
+    /**
+     * La fenetre
+     */
     private Stage stage;
+    
+    /**
+     * L'utilisateur de l'application
+     */
     private User loggedUser;
+    
+    /**
+     * La taille de la fenetre
+     */
     private final double WINDOW_WIDTH = 390.0;
     private final double WINDOW_HEIGHT = 300.0;
-
+    
+    /**
+     * Le point d'entrée principal pour toutes les applications JavaFX.
+     * 
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -56,7 +71,19 @@ public class Main extends Application {
         launch(args);
     }
         
-    //Appelée par la méthode processLogin du controller LoginController
+    /**
+     * Regarde si l'utilisateur existe dans la base de donnée
+     * Enregistre l'utisateur dans un objet User
+     * Affiche la fenetre de gestion des visites
+     * 
+     * @param userId
+     * @param password
+     * @return vrai si l'utilisateur existe, sous la forme d'un booléen
+     * 
+     * @see Authenticator#connexion(java.lang.String, java.lang.String) 
+     * @see User
+     * @see Main#gotoVisite() 
+     */
     public boolean userLogging(String userId, String password){
         if (Authenticator.connexion(userId, password)) {//Utilise le modele Authenticator pour verifier si le login est bon
             loggedUser = new User(userId);//Stock un object User dans loggedUser
@@ -67,7 +94,12 @@ public class Main extends Application {
         }
     }
     
-    //affiche la scene login
+    /**
+     * Affiche la scene login
+     * 
+     * @see Main#replaceSceneContent
+     * @see LoginController#setApp(algobreizh.Main)
+     */
     private void gotoLogin() {
         try {
             LoginController login = (LoginController) replaceSceneContent("view/login.fxml");
@@ -76,7 +108,13 @@ public class Main extends Application {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //Affiche la scene visite
+    
+    /**
+     * Affiche la scene visite
+     * 
+     * @see Main#replaceSceneContent
+     * @see LoginController#setApp(algobreizh.Main)
+     */
     private void gotoVisite(){
         try {
             VisiteController visite = (VisiteController) replaceSceneContentVisite("view/visite.fxml");
@@ -86,13 +124,23 @@ public class Main extends Application {
         }
     }
     
-    //remplace une scene par une autre
+    /**
+     * Charge le fichier fxml dans une scene et l'affiche dans la fenetre
+     * 
+     * @param fxml
+     *              Le nom de la scene a charger
+     * 
+     * @return Le controlleur de la scene à charger
+     * @throws Exception 
+     * 
+     * @see Main#stage
+     */
     private Initializable replaceSceneContent(String fxml) throws Exception {
-        //Charge le fichier XML
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource(fxml));
+        
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);
@@ -100,7 +148,6 @@ public class Main extends Application {
             in.close();
         } 
         
-        //Ajoute la scene a la fenetre
         Scene scene = new Scene(page, 390, 300);
         stage.setScene(scene);
         stage.sizeToScene();
@@ -108,12 +155,23 @@ public class Main extends Application {
         return (Initializable) loader.getController();
     }
     
+    /**
+     * Charge le fichier fxml dans une scene et l'affiche
+     * dans la fenetre stage
+     * 
+     * @param fxml
+     *              le nom de la scene à charger
+     * @return Le controlleur de la scene
+     * @throws Exception 
+     * 
+     * @see Main#stage
+     */
     private Initializable replaceSceneContentVisite(String fxml) throws Exception {
-        //Charge le fichier XML
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource(fxml));
+        
         BorderPane page;
         try {
             page = (BorderPane) loader.load(in);
@@ -121,24 +179,33 @@ public class Main extends Application {
             in.close();
         } 
   
-        //Ajoute la scene a la fenetre
         Scene scene = new Scene(page, 1180, 600);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setResizable(true);
-        //Centre la fenetre
+        
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
         
         return (Initializable) loader.getController();
     }
-
+    
+    /**
+     * Retourne l'utilisateur connecté
+     * 
+     * @return l'utilisateur connecté, sous la forme d'un objet User
+     */
     public User getLoggedUser() {
         return loggedUser;
     }
 
-    //Méthode appelée pour se deconnecter
+    /**
+     * Deconnecte l'utilisateur de l'application
+     * et retourne a l'écran de connexion
+     * 
+     * @see Main#gotoLogin() 
+     */
     public void userLogout() {
         loggedUser = null;
         gotoLogin();
