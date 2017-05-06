@@ -29,7 +29,9 @@ public class RendezVous {
     private final StringProperty heureDebut;
     private final StringProperty heureFin;
     
-    
+    /**
+     * Appele le constructeur suivant
+     */
     public RendezVous(){
        this(null, null, null, null);
     }

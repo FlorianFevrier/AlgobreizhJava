@@ -29,8 +29,7 @@ import javafx.collections.FXCollections;
  */
 public class Client {
     /**
-     * L'ID, le nom, le num de tél, l'adresse, le responsable,
-     * et l'historique de visite du client
+     * L'ID, le nom, le num de tél, l'adresse, le responsable du client
      */
     private final int id;
     private final StringProperty date;
@@ -38,8 +37,14 @@ public class Client {
     private final StringProperty tel;
     private final StringProperty addresse;
     private final StringProperty responsable;
+    /**
+     * l'historique de visite du client
+     */
     protected ListProperty<String> listProperty = new SimpleListProperty<>();
     
+    /**
+     * Appele le constructeur suivant
+     */
     public Client(){
         this(0, null, null, null, null, null, null);
     }

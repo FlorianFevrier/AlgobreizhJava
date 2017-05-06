@@ -70,6 +70,8 @@ public class LoginController implements Initializable {
     
     /**
      * Initialise le contrôleur.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -82,6 +84,7 @@ public class LoginController implements Initializable {
      * Action qui se produit quand on clic sur le bouton login.
      * Affiche un message d'erreur si les identifiants entrées sont valides
      * 
+     * @param event
      * @see Main#userLogging(java.lang.String, java.lang.String)
      * @see LoginController#errorMessage
      * 

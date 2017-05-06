@@ -188,6 +188,8 @@ public class VisiteController implements Initializable {
     
     /**
      * Initialise le contrôleur.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
