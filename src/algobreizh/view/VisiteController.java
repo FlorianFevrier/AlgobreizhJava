@@ -33,74 +33,144 @@ import jfxtras.scene.control.CalendarTimeTextField;
  * @author florian
  */
 public class VisiteController implements Initializable {
+    /**
+     * Affiche le nom du commercial
+     */
     @FXML
     private Label nomCommercial;
     
+    /**
+     * Affiche la zone géographique du commercial
+     */
     @FXML
     private Label zoneCommercial;
    
+    /**
+     * Affiche le nom du client sélectionné
+     */
     @FXML
     private Label nomClient;
     
+    /**
+     * Affiche l'adresse du client sélectionné
+     */
     @FXML
     private Label villeClient;
     
+    /**
+     * Affche le téléphone du client sélectionné
+     */
     @FXML
     private Label telClient;
     
-    //tableau des dernieres visites
+    /**
+     * Tableau qui contient l'historique des derniere visite
+     */
     @FXML
     private TableView<Client> visteTable;
     
+    /**
+     * Colonne qui contient la date des derniere visite
+     */
     @FXML
     private TableColumn<Client, String> dateColumn;
-    
+    /**
+     * Colonne qui contient le nom des client 
+     */
     @FXML
     private TableColumn<Client, String> nomClientColumn;
     
-    //tableau des rendez vous
+    /**
+     * Tableau qui contient la liste des rendez-vous
+     */
     @FXML
     private TableView<RendezVous> rendezVousTable;
     
+    /**
+     * Colonne qui contient la date des rendez-vous
+     */
     @FXML
     private TableColumn<RendezVous, String> dateRendezVousColumn;
-    
+    /**
+     * Colonne qui contient le nom des client pour les rendez-vous
+     */
     @FXML
     private TableColumn<RendezVous, String> nomClientRendezVousColumn;
-    
+    /**
+     * Colonne qui contient l'heure à laquel commence un rendez-vous
+     */
     @FXML
     private TableColumn<RendezVous, String> heureDebutColumn;
-    
+    /**
+     * Colonne qui contient l'heure à laquel se termine un rendez-vouss
+     */
     @FXML
     private TableColumn<RendezVous, String> heureFinColumn;
-    
+    /**
+     * Affiche l'historique de visite du client 
+     */
     @FXML
     private ListView<String> listView= new ListView(); 
     
+    /**
+     * Zone de saisie de l'adresse ou on prend le rendez-vous
+     */
     @FXML
     private TextField lieu;
     
+    /**
+     * Zone de saisie de la personne a contacter pour le rendez-vous
+     */
     @FXML
     private TextField contact;
     
+    /**
+     * Calendrier pour choisir la date du rendez-vous
+     */
     @FXML
     private DatePicker dateRdv;
     
+    /**
+     * Permet de choisir à quel heure debute le rendez-vous
+     */
     @FXML
     private CalendarTimeTextField heureDebut;
     
+    /**
+     * Permet de choisir à quel heure termine le rendez-vous
+     */
     @FXML
     private CalendarTimeTextField heureFin;
     
+    /**
+     * Zone de saisie pour ajouter un commentaire sur le rendez-vous
+     */
     @FXML
     private TextArea comment;
     
+    /**
+     * Zone de Saisie du nom du client  pour le rendez-vous
+     */
     @FXML
     private TextField clientRdv;
-            
+    /**
+     * Référence de la classe Main
+     */
     private Main application;
+    /**
+     * L'ID du client selectionné
+     */
     private int idClient;
     
+    /**
+    * Est appelée par la classe Main, pour lui passer une référence vers elle même,
+    * cela permet de récuperer certains attributs et méthodes de la classe Main
+    * 
+    * @param application
+    *          Instance de la classe Main
+    *              
+    * @see Main
+    */
     public void setApp(Main application){
         this.application = application;
         
@@ -117,7 +187,7 @@ public class VisiteController implements Initializable {
     }
     
     /**
-     * Initializes the controller class.
+     * Initialise le contrôleur.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
@@ -137,18 +207,22 @@ public class VisiteController implements Initializable {
             (observable, oldValue, newValue) -> showClientDetails(newValue));
     }    
     
+    /**
+     * Remplie les label et les textField avec les information du client
+     * et enregistre l'id du client selectionné
+     * 
+     * @param client
+     *          Le client selectionné dans la liste
+     */
     private void showClientDetails(Client client) {
         if (client != null) {
-            // Remplie les labels et la liste avec les information clients
             nomClient.setText(client.getnomClient());
             villeClient.setText(client.getaddresse());
             telClient.setText(client.gettel());
             listView.getItems().clear();
             listView.getItems().addAll(client.listVisiteProperty());
-            //pre-remplie les info du client pour la prise de rendez-vous
             lieu.setText(client.getaddresse());  
             clientRdv.setText(client.getnomClient());
-            //Stock l'id du client selectionné
             this.idClient = client.getId();
         } else {
             nomClient.setText("");
@@ -161,8 +235,16 @@ public class VisiteController implements Initializable {
         }
     }
     
+    /**
+     * Creer un rendez dans la base de données.
+     * Recupere l'utilisateur et verifie si les parametres entrées 
+     * sont valides avant l'insertion dans la bd.
+     * On actualise la liste des rendez-vous apres l'enregistrement du rendez-vous
+     * 
+     * @see Main#loggedUser
+     * @see User#setRendezVous(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) 
+     */
     public void creezRendezVous(){
-        //Appele le model user pour creez un rendez vous
         User loggedUser = application.getLoggedUser();
         
         boolean inputValid = true;
@@ -177,7 +259,6 @@ public class VisiteController implements Initializable {
             inputValid = false;
         }
  
-        
         if(lieu.getText() == null || lieu.getText().trim().isEmpty()){
             showAlert("Vous devez entrez un lieu");
             inputValid = false;
@@ -210,7 +291,6 @@ public class VisiteController implements Initializable {
         //regarder si l'heure de rendez vous n'est pas deja rentrez 
         
         if(inputValid){
-            System.out.println("valid");
             String idUser = Integer.toString(loggedUser.getidUSer());
             String idClientR = Integer.toString(this.idClient);
             String dateR = dateRdv.getValue().toString();
@@ -218,7 +298,7 @@ public class VisiteController implements Initializable {
             String heureF = heureFin.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + heureFin.getCalendar().get(Calendar.MINUTE);
                       
             loggedUser.setRendezVous(idUser, idClientR, lieu.getText(), comment.getText(), contact.getText(), dateR, heureD, heureF);
-            //rafraichie la liste des rendez-vous
+
             rendezVousTable.setItems(loggedUser.getNewrendezVous());
         }
     }
@@ -227,7 +307,7 @@ public class VisiteController implements Initializable {
      * Affiche un message d'erreur dans une fenetre de dialogue
      * 
      * @param message
-     *             Le message a afficher
+     *             Le message a afficher en cas d'erreur
      */
     private void showAlert(String message){
         Alert alert = new Alert(AlertType.INFORMATION);

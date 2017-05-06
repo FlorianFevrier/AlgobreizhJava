@@ -51,14 +51,18 @@ public class LoginController implements Initializable {
     Label errorMessage;
     
     /**
-     * Reference to the main application.
+     * Référence vers la classe Main
      */
     private Main application;
     
     /**
-     * Is called by the main application to give a reference back to itself.
+     * Est appelée par la classe Main, pour lui passer une référence vers elle même,
+     * cela permet de récuperer certains attributs et méthodes de la classe Main
      * 
      * @param application
+     *          Instance de la classe Main
+     * 
+     * @see Main            
      */
     public void setApp(Main application){
         this.application = application;

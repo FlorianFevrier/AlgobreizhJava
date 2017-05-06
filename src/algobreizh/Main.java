@@ -24,7 +24,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- *
+ * Classe principale de l'application
+ * 
+ * 
  * @author florian
  */
 public class Main extends Application {
@@ -39,12 +41,6 @@ public class Main extends Application {
     private User loggedUser;
     
     /**
-     * La taille de la fenetre
-     */
-    private final double WINDOW_WIDTH = 390.0;
-    private final double WINDOW_HEIGHT = 300.0;
-    
-    /**
      * Le point d'entrée principal pour toutes les applications JavaFX.
      * 
      * @param primaryStage 
@@ -54,8 +50,8 @@ public class Main extends Application {
         try {
             stage = primaryStage;
             stage.setTitle("Algobreizh");
-            stage.setWidth(WINDOW_WIDTH);
-            stage.setHeight(WINDOW_HEIGHT);
+            stage.setWidth(390);
+            stage.setHeight(300);
             stage.setResizable(false);
             gotoLogin();
             primaryStage.show();
@@ -85,8 +81,8 @@ public class Main extends Application {
      * @see Main#gotoVisite() 
      */
     public boolean userLogging(String userId, String password){
-        if (Authenticator.connexion(userId, password)) {//Utilise le modele Authenticator pour verifier si le login est bon
-            loggedUser = new User(userId);//Stock un object User dans loggedUser
+        if (Authenticator.connexion(userId, password)) {
+            loggedUser = new User(userId);
             gotoVisite();
             return true;
         } else {

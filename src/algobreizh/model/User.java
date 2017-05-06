@@ -15,28 +15,64 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
+ * <b>User est la classe représentant le commercial</b>
+ * <p>Un commercial est caractérisé par les informations suivantes :</p>
+ * <ul>
+ * <li>Un identifiant unique attribué définitivement.</li>
+ * <li>Son nom</li>
+ * <li>Une adresse email</li>
+ * <li>Une zone géographique</li>
+ * </ul>
+ * De plus un commercial a une liste de Client et une liste de rendez-vous,
+ * le commercial pourra rajouter des rendez-vous à cette liste.
+ * 
+ * @see Client
+ * @see RendezVous
+ * 
  * @author florian
  */
 public class User {
-    //email, nom, zone et id du commercial
+    /**
+     * email, nom, zone et id du commercial
+     */
     private String email;
     private String nom;
     private String zone;
     private int id;
-    // liste de tout les client du commercial
+    /** 
+     * Liste de tout les client du commercial
+     */
     private ObservableList<Client> visiteData = FXCollections.observableArrayList();
-    // liste qui sert a stocke temporairement les visites d'un client
+    /**
+     * liste qui sert à stocker temporairement les visites d'un client
+     */
     private List<String> listeVisite = new ArrayList<>();
-    // liste de tout les rendez vous du commercial
+    /**
+     * Liste de tout les rendez vous du commercial
+     */
     private ObservableList<RendezVous> rendezVous = FXCollections.observableArrayList();
 
+    /**
+     * Constructeur User
+     * A la construction d'un objet User, l'email du commercial est enregistré
+     * Ainsi que la liste de tous ses clients et la liste de ses rendez-vous.
+     * 
+     * @param email 
+     *          L'email du commercial
+     * @see User#getInfo() 
+     */
     public User(String email) {
         this.email = email;
         this.getInfo();
     }
     
-    //Recupere les info du commercial
+    /**
+     * Recupere les informations du commercial, ses client et ses rendez-vous.
+     * 
+     * @see User#recupInfoCommercial() 
+     * @see User#recupClient() 
+     * @see User#recupListeRendezVous() 
+     */
     private void getInfo(){
         try {    
             recupInfoCommercial();
@@ -47,7 +83,27 @@ public class User {
         }
     }
     
-    //enregistre un rendez-vous dans la base de donnée
+    /**
+     * Enregistre un rendez-vous dans la base de données
+     * 
+     * @param idCommercial
+     *              L'ID du commercial 
+     * @param idClient
+     *              L'ID du client
+     * @param lieu
+     *              L'adresse du rendez-vous
+     * @param commentaire
+     *              Commentaire sur le rendez-vous
+     * @param contact
+     *              La personne à contacter
+     * @param dateRdv
+     *              Le jour ou a lieu le rendez-vous
+     * @param heureD
+     *              L'heure à laquel commence le rendez-vous
+     * @param heureF 
+     *              L'heure à laquel se termine le rendez-vous
+
+     */
     public void setRendezVous(String idCommercial, String idClient, String lieu, String commentaire, String contact, String dateRdv, String heureD, String heureF){
         try {
             /* Création de l'objet gérant les requêtes */
@@ -76,7 +132,14 @@ public class User {
         }
     }
     
-    //Recupere les info sur le commercial
+    /**
+     * Recupere le nom, la zone géographique et le nom du commercial,
+     * dans la base de données
+     * 
+     * @see User#id
+     * @see User#nom
+     * @see User#zone
+     */
     private void recupInfoCommercial(){
         try {
             /* Création de l'objet gérant les requêtes */
@@ -99,7 +162,13 @@ public class User {
         }
     }
     
-    //Recupere la liste des rendez vous 
+    /**
+     * Recupere les rendez-vous du commercial dans la base de données
+     * et les ajoutes dans une liste d'objet RendezVous
+     * 
+     * @see User#rendezVous
+     * @see RendezVous
+     */
     private void recupListeRendezVous(){
         try {
             PreparedStatement rendezVousStatement = ConnectionBd.getInstance().prepareStatement("SELECT rendezVous.date AS dateRdv, rendezVous.heureDebut AS heureDebut, rendezVous.heureFin AS heureFin, client.nom AS clientRdv FROM rendezVous INNER JOIN client ON rendezVous.idClient = client.idClient WHERE rendezVous.idCommercial = ?");
@@ -109,6 +178,7 @@ public class User {
             while ( resultRendezVous.next() ) {
                 rendezVous.add(new RendezVous(resultRendezVous.getString("dateRdv"), resultRendezVous.getString("heureDebut"), resultRendezVous.getString("heureFin"), resultRendezVous.getString("clientRdv")));
             }
+            
             rendezVousStatement.close();
             resultRendezVous.close();
         } catch (Exception e) {
@@ -116,7 +186,14 @@ public class User {
         }
     }
     
-   //Recupere les client du commercial
+    /**
+     * Recupere les client du commercial ainsi que l'historique de visite du client,
+     * et les ajoutes dans une liste d'objet Client
+     * 
+     * @see User#visiteData
+     * @see User#listeVisite
+     * @see Client
+     */
     private void recupClient(){
         try {
             PreparedStatement preparedStatement = ConnectionBd.getInstance().prepareStatement("SELECT idClient AS id, derniereVisite AS dateVisite, nom AS nomClient, num_tel AS tel, adresse AS ad, responsable AS res FROM client WHERE client.zone = ? ORDER BY derniereVisite;");
@@ -130,7 +207,7 @@ public class User {
                 visiteStatement.setString( 1, result.getString("id"));
                 //Execute la requete
                 ResultSet visiteResult = visiteStatement.executeQuery();
-                //Ajout les visites dans une liste
+                //Ajout les visites dans une liste temporaire
                 while(visiteResult.next()){
                     listeVisite.add(visiteResult.getString("dateVisite"));
                 }
@@ -148,36 +225,68 @@ public class User {
             e.printStackTrace();
         }
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-        
+    
+    /**
+     * Retourne l'email du commercial
+     * @return l'email du commercial, sous forme d'une chaine de caractères
+     */        
     public String getEmail() {
         return email;
     }
+    /**
+     * Retourne le nom du commercial
+     * @return le nom du commercial, sous forme d'une chaine de caractères
+     */
     public String getNom(){
         return this.nom;
     }
     
+    /**
+     * Retourne la zone géographique du commercial
+     * @return la zone géographique du commercial, sous forme d'une
+     *         chaine de caractères
+     */
     public String getZone(){
         return this.zone;
     }
     
+    /**
+     * Retourne la liste des client du commercial
+     * @return  la liste des client du commercial, sous la forme 
+     *          d'une ObservableList
+     */
     public ObservableList<Client> getPersonData() {
         return visiteData;
     }
-    
+    /**
+     * 
+     * Retourne la liste des rendez-vous du commercial
+     * @return  la liste des rendez-vous du commercial, sous la forme 
+     *          d'une ObservableList
+     */    
     public ObservableList<RendezVous> getrendezVous() {
         return rendezVous;
     }
     
+    /**
+     * Remet à zéro la liste des rendez-vous,
+     * Recupère les nouveaux rendez-vous,
+     * Retourne la liste des rendez-vous du commercial à jour.
+     * 
+     * @return  la liste des rendez-vous du commercial, sous la forme 
+     *          d'une ObservableList
+     */   
     public ObservableList<RendezVous> getNewrendezVous() {
         rendezVous.clear();
         recupListeRendezVous();
         return rendezVous;
     }
     
+    /**
+     * Retourne l'id du commercial
+     * 
+     * @return 
+     */
     public int getidUSer(){
         return this.id;
     }

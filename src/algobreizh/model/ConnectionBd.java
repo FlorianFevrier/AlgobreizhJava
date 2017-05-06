@@ -14,21 +14,43 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- *
+ * ConnectionBd est la classe qui effectue la liaison à la base de données,
+ * selon le design pattern singleton
+ * 
  * @author florian
  */
 public class ConnectionBd {
-  //URL de connexion
+  /**
+   * Chemin de la base de données
+   */
   private String url = "jdbc:mysql://51.254.222.13/algobreizh";
+  /**
+   * Fichier de conf de la base de données, contient l'identifiant et le mot de passe
+   */
   private String conf = "src/algobreizh/model/config.txt";
 
+  /**
+   * Nom d'utilisateur 
+   */
   private String user = null;
+  /**
+   * Mot de passe
+   */
   private String passwd = null;
 
-  //Objet Connection
+  /**
+   * Une connexion à la base de données
+   */
   private static Connection connect;
 
-  //Constructeur privé
+  /**
+   * Constructeur privée ConnectionBd
+   * 
+   * <p>A la construction d'un objet ConnectionBd,
+   * on récupere les identifiants de connexion dans le fichier config.txt.
+   * Puis on se connecte à la base de données
+   * </p>
+   */
   private ConnectionBd(){
     //On va lire les info pour se connecter à la base de données dans un fichier texte
     try
@@ -55,10 +77,8 @@ public class ConnectionBd {
         System.out.println ("Le fichier n'a pas été trouvé");
     }
     
-    //On se connecte à la base de donnée
-    try {
-        //Chargement du driver JDBC
-        //Class.forName("com.mysql.jdbc.Driver");   
+    //On se connecte à la base de données
+    try { 
         connect = DriverManager.getConnection(url, user, passwd);
 
     } catch (SQLException e) {
@@ -67,7 +87,10 @@ public class ConnectionBd {
 
   }
 
-  //Méthode qui va nous retourner notre instance et la créer si elle n'existe pas
+  /**
+   * Retourne une instance de la base de données
+   * @return une instance de la base de données, sous forme d'objet Connection
+   */
    public static Connection getInstance(){
 
     if(connect == null){
