@@ -24,19 +24,19 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Classe principale de l'application
+ * Classe principale de l'application.
  * 
  * 
  * @author florian
  */
 public class Main extends Application {
     /**
-     * La fenetre
+     * La fênetre.
      */
     private Stage stage;
     
     /**
-     * L'utilisateur de l'application
+     * L'utilisateur de l'application.
      */
     private User loggedUser;
     
@@ -68,13 +68,15 @@ public class Main extends Application {
     }
         
     /**
-     * Regarde si l'utilisateur existe dans la base de donnée
-     * Enregistre l'utisateur dans un objet User
-     * Affiche la fenetre de gestion des visites
+     * Regarde si l'utilisateur existe dans la base de données.<br>
+     * Enregistre l'utilisateur dans un objet User.<br>
+     * Affiche la fenêtre de gestion des visites.
      * 
      * @param userId
+     *          L'email du commercial.
      * @param password
-     * @return vrai si l'utilisateur existe, sous la forme d'un booléen
+     *          Le mot de passe du commercial.
+     * @return vrai si l'utilisateur existe sinon faux, sous la forme d'un booléen.
      * 
      * @see Authenticator#connexion(java.lang.String, java.lang.String) 
      * @see User
@@ -91,7 +93,7 @@ public class Main extends Application {
     }
     
     /**
-     * Affiche la scene login
+     * Affiche l'écran de connexion.
      * 
      * @see Main#replaceSceneContent
      * @see LoginController#setApp(algobreizh.Main)
@@ -106,9 +108,9 @@ public class Main extends Application {
     }
     
     /**
-     * Affiche la scene visite
+     * Affiche l'écran de gestion des rendez-vous.
      * 
-     * @see Main#replaceSceneContent
+     * @see Main#replaceSceneContentVisite
      * @see LoginController#setApp(algobreizh.Main)
      */
     private void gotoVisite(){
@@ -121,16 +123,21 @@ public class Main extends Application {
     }
     
     /**
-     * Charge le fichier fxml dans une scene et l'affiche dans la fenetre
+     * <p>Remplace une scène par une autre.</p>
+     * <ul>
+     * <li>Charge le fichier fxml dans un layout AnchorPane.</li>
+     * <li>L'ajoute à la scène.</li>
+     * <li>Ajoute la scène à la fênetre.</li>
      * 
+     * </ul>
      * @param fxml
-     *              Le nom de la scene a charger
+     *              le nom du fichier fxml à charger.
      * 
-     * @return Le controlleur de la scene à charger
+     * @return Le contrôleur de la scène.
      * @throws Exception 
      * 
      * @see Main#stage
-     */
+    */
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
@@ -152,16 +159,22 @@ public class Main extends Application {
     }
     
     /**
-     * Charge le fichier fxml dans une scene et l'affiche
-     * dans la fenetre stage
+     * <p>Remplace une scène par une autre.</p>
+     * <ul>
+     * <li>Charge le fichier fxml dans un layout BorderPane.</li>
+     * <li>L'ajoute à la scène.</li>
+     * <li>Ajoute la scène à la fênetre.</li>
+     * <li>Centre la fênetre.</li>
+     * </ul>
      * 
      * @param fxml
-     *              le nom de la scene à charger
-     * @return Le controlleur de la scene
+     *          Le nom du fichier fxml à charger.
+     * 
+     * @return Le contrôleur de la scène.
      * @throws Exception 
      * 
      * @see Main#stage
-     */
+    */
     private Initializable replaceSceneContentVisite(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
@@ -188,17 +201,17 @@ public class Main extends Application {
     }
     
     /**
-     * Retourne l'utilisateur connecté
+     * Retourne l'utilisateur connecté.
      * 
-     * @return l'utilisateur connecté, sous la forme d'un objet User
+     * @return L'utilisateur connecté, sous la forme d'un objet User.
      */
     public User getLoggedUser() {
         return loggedUser;
     }
 
     /**
-     * Deconnecte l'utilisateur de l'application
-     * et retourne a l'écran de connexion
+     * Déconnecte l'utilisateur de l'application
+     * et retourne à l'écran de connexion.
      * 
      * @see Main#gotoLogin() 
      */

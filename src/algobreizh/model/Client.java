@@ -13,37 +13,52 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 
 /**
- * <b>Client est la classe représentant un client</b>
+ * <p>Client est la classe représentant un client.</p>
  * <p>Un client est caractérisé par les informations suivantes :</p>
  * <ul>
  * <li>Un identifiant unique attribué définitivement.</li>
- * <li>La dernière date à laquel le client à reçu une visite du commercial</li>
- * <li>Le nom de l'entreprise</li>
- * <li>Son numéro de téléphone</li>
- * <li>Son adresse</li>
- * <li>le nom du responsable de l'entreprise</li>
- * <li>l'historique de visite du client</li>
+ * <li>La dernière date à laquel le client à reçu une visite du commercial.</li>
+ * <li>Le nom de l'entreprise.</li>
+ * <li>Son numéro de téléphone.</li>
+ * <li>Son adresse.</li>
+ * <li>le nom du responsable de l'entreprise.</li>
+ * <li>l'historique de visite du client.</li>
  * </ul>
  * 
  * @author florian
  */
 public class Client {
     /**
-     * L'ID, le nom, le num de tél, l'adresse, le responsable du client
+     * L'ID du client.
      */
     private final int id;
+    /**
+     * La date de dernière visite du client.
+     */
     private final StringProperty date;
+    /**
+     * Le nom du client.
+     */
     private final StringProperty nomClient;
+    /**
+     * Le numéro de téléphone du client.
+     */
     private final StringProperty tel;
-    private final StringProperty addresse;
+    /**
+     * L'adresse du client.
+     */
+    private final StringProperty adresse;
+    /**
+     * Le nom du responsable de l'entreprise.
+     */
     private final StringProperty responsable;
     /**
-     * l'historique de visite du client
+     * l'historique de visite du client.
      */
     protected ListProperty<String> listProperty = new SimpleListProperty<>();
     
     /**
-     * Appele le constructeur suivant
+     * Appele le constructeur suivant.
      */
     public Client(){
         this(0, null, null, null, null, null, null);
@@ -72,164 +87,164 @@ public class Client {
         this.date = new SimpleStringProperty(date);
         this.nomClient = new SimpleStringProperty(nomClient);
         this.tel = new SimpleStringProperty(tel);
-        this.addresse = new SimpleStringProperty(addresse);
+        this.adresse = new SimpleStringProperty(addresse);
         this.responsable = new SimpleStringProperty(responsable);
         listProperty.set(FXCollections.observableArrayList(listeVisite));
     }
  
     /**
-     * Retourne l'ID du client
+     * Retourne l'ID du client.
      * 
-     * @return l'id du client, sous forme d'entier
+     * @return L'id du client, sous forme d'entier.
      */
     public int getId(){
         return id;
     }
     
     /**
-     * Retourne la date de dernière visite
+     * Retourne la date de dernière visite.
      * 
-     * @return la date de dernière visite, sous la forme d'une chaine de caractère
+     * @return La date de dernière visite, sous la forme d'une chaine de caractère.
      */
     public String getDate(){
         return date.get();
     }
 
     /**
-     * Met à jour la date de dernière visite
+     * Met à jour la date de dernière visite.
      * 
      * @param date 
-     *          la date de dernière visite, sous la forme d'une chaine de caractère
+     *          La date de dernière visite, sous la forme d'une chaine de caractère.
      */    
     public void setDate(String date){
         this.date.set(date);
     }
 
     /**
-     * Retourne la date de dernière visite
+     * Retourne la date de dernière visite.
      * 
-     * @return la date de dernière visite, sous la forme d'une StringProperty
+     * @return La date de dernière visite, sous la forme d'une StringProperty.
      */    
     public StringProperty dateProperty(){
         return date;
     }
  
     /**
-     * Retourne le nom du client
+     * Retourne le nom du client.
      * 
-     * @return le nom du client, sous la forme d'une chaine de caractère
+     * @return Le nom du client, sous la forme d'une chaine de caractère.
      */    
     public String getnomClient(){
         return nomClient.get();
     }
 
     /**
-     * Met à jour le nom du client
+     * Met à jour le nom du client.
      * 
      * @param nomClient
-     *          le nom du client, sous la forme d'une chaine de caractère
+     *          Le nom du client, sous la forme d'une chaine de caractère.
      */        
     public void setnomClient(String nomClient){
         this.nomClient.set(nomClient);
     }
     
     /**
-     * Retourne le nom du client
+     * Retourne le nom du client.
      * 
-     * @return le nom du client, sous la forme d'une StringProperty
+     * @return Le nom du client, sous la forme d'une StringProperty.
      */    
     public StringProperty nomClientProperty(){
         return nomClient;
     }
 
     /**
-     * Retourne le numéro de téléphone du client
+     * Retourne le numéro de téléphone du client.
      * 
-     * @return le numéro de téléphone, sous la forme d'une chaine de caractère
+     * @return Le numéro de téléphone, sous la forme d'une chaine de caractère.
      */       
     public String gettel(){
         return tel.get();
     }
 
     /**
-     * Met à jour le numéro de téléphone du client
+     * Met à jour le numéro de téléphone du client.
      * 
      * @param tel
-     *          le numéro de téléphone, sous la forme d'une chaine de caractère
+     *          Le numéro de téléphone, sous la forme d'une chaine de caractère.
      */       
     public void settel(String tel){
         this.tel.set(tel);
     }
     
     /**
-     * Retourne le numéro de téléphone du client
+     * Retourne le numéro de téléphone du client.
      * 
-     * @return le numéro de téléphone, sous la forme d'une StringProperty
+     * @return Le numéro de téléphone, sous la forme d'une StringProperty.
      */    
     public StringProperty telProperty(){
         return tel;
     }
 
     /**
-     * Retourne l'adresse du client
+     * Retourne l'adresse du client.
      * 
-     * @return l'adresse, sous la forme d'une chaine de caractère
+     * @return L'adresse, sous la forme d'une chaine de caractère.
      */       
-    public String getaddresse(){
-        return addresse.get();
+    public String getadresse(){
+        return adresse.get();
     }
 
     /**
-     * Met à jour l'adresse du client
+     * Met à jour l'adresse du client.
      * 
      * @param addresse
-     *          l'adresse du client, sous la forme d'une chaine de caractère
+     *          L'adresse du client, sous la forme d'une chaine de caractère.
      */       
     public void setaddresse(String addresse){
-        this.addresse.set(addresse);
+        this.adresse.set(addresse);
     }
     
     /**
-     * Retourne l'adresse du client
+     * Retourne l'adresse du client.
      * 
-     * @return l'adresse du client, sous la forme d'une StringProperty
+     * @return L'adresse du client, sous la forme d'une StringProperty.
      */    
     public StringProperty addresseProperty(){
-        return addresse;
+        return adresse;
     }
 
     /**
-     * Retourne le nom du responsable 
+     * Retourne le nom du responsable.
      * 
-     * @return le nom du responsable, sous la forme d'une chaine de caractère
+     * @return Le nom du responsable, sous la forme d'une chaine de caractère.
      */       
     public String getresponsable(){
         return responsable.get();
     }
 
     /**
-     * Met à jour le nom du responsable
+     * Met à jour le nom du responsable.
      * 
      * @param responsable
-     *          le nom du responsable, sous la forme d'une chaine de caractère
+     *          Le nom du responsable, sous la forme d'une chaine de caractère.
      */       
     public void setresponsable(String responsable){
         this.responsable.set(responsable);
     }
     
     /**
-     * Retourne le nom du responsable
+     * Retourne le nom du responsable.
      * 
-     * @return le nom du responsable, sous la forme d'une StringProperty
+     * @return le nom du responsable, sous la forme d'une StringProperty.
      */    
     public StringProperty responsableProperty(){
         return responsable;
     }
     
     /**
-     * Retourne l'historique de visite
+     * Retourne l'historique de visite.
      * 
-     * @return l'historique de visite, sous la forme d'une ListProperty
+     * @return L'historique de visite, sous la forme d'une ListProperty.
      */    
     public ListProperty listVisiteProperty(){
         return listProperty;

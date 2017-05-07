@@ -27,147 +27,147 @@ import javafx.scene.control.TextField;
 import jfxtras.scene.control.CalendarTimeTextField;
 
 /**
- * FXML Controller class
- * Le controlleur de la scene visite 
+ * FXML Controller class,
+ * Le contrôleur de la scène visite.
  * 
  * @author florian
  */
 public class VisiteController implements Initializable {
     /**
-     * Affiche le nom du commercial
+     * Affiche le nom du commercial.
      */
     @FXML
     private Label nomCommercial;
     
     /**
-     * Affiche la zone géographique du commercial
+     * Affiche la zone géographique du commercial.
      */
     @FXML
     private Label zoneCommercial;
    
     /**
-     * Affiche le nom du client sélectionné
+     * Affiche le nom du client sélectionné.
      */
     @FXML
     private Label nomClient;
     
     /**
-     * Affiche l'adresse du client sélectionné
+     * Affiche l'adresse du client sélectionné.
      */
     @FXML
     private Label villeClient;
     
     /**
-     * Affche le téléphone du client sélectionné
+     * Affiche le téléphone du client sélectionné.
      */
     @FXML
     private Label telClient;
     
     /**
-     * Tableau qui contient l'historique des derniere visite
+     * Tableau qui contient l'historique des dernières visites.
      */
     @FXML
     private TableView<Client> visteTable;
     
     /**
-     * Colonne qui contient la date des derniere visite
+     * Colonne qui contient la date des dernières visites.
      */
     @FXML
     private TableColumn<Client, String> dateColumn;
     /**
-     * Colonne qui contient le nom des client 
+     * Colonne qui contient le nom des clients.
      */
     @FXML
     private TableColumn<Client, String> nomClientColumn;
     
     /**
-     * Tableau qui contient la liste des rendez-vous
+     * Tableau qui contient la liste des rendez-vous.
      */
     @FXML
     private TableView<RendezVous> rendezVousTable;
     
     /**
-     * Colonne qui contient la date des rendez-vous
+     * Colonne qui contient la date des rendez-vous.
      */
     @FXML
     private TableColumn<RendezVous, String> dateRendezVousColumn;
     /**
-     * Colonne qui contient le nom des client pour les rendez-vous
+     * Colonne qui contient le nom des client pour les rendez-vous.
      */
     @FXML
     private TableColumn<RendezVous, String> nomClientRendezVousColumn;
     /**
-     * Colonne qui contient l'heure à laquel commence un rendez-vous
+     * Colonne qui contient l'heure à laquel commence un rendez-vous.
      */
     @FXML
     private TableColumn<RendezVous, String> heureDebutColumn;
     /**
-     * Colonne qui contient l'heure à laquel se termine un rendez-vouss
+     * Colonne qui contient l'heure à laquel se termine un rendez-vous.
      */
     @FXML
     private TableColumn<RendezVous, String> heureFinColumn;
     /**
-     * Affiche l'historique de visite du client 
+     * Affiche l'historique de visite du client.
      */
     @FXML
     private ListView<String> listView= new ListView(); 
     
     /**
-     * Zone de saisie de l'adresse ou on prend le rendez-vous
+     * Zone de saisie de l'adresse ou on prend le rendez-vous.
      */
     @FXML
     private TextField lieu;
     
     /**
-     * Zone de saisie de la personne a contacter pour le rendez-vous
+     * Zone de saisie de la personne a contacter pour le rendez-vous.
      */
     @FXML
     private TextField contact;
     
     /**
-     * Calendrier pour choisir la date du rendez-vous
+     * Calendrier pour choisir la date du rendez-vous.
      */
     @FXML
     private DatePicker dateRdv;
     
     /**
-     * Permet de choisir à quel heure debute le rendez-vous
+     * Permet de choisir à quel heure débute le rendez-vous.
      */
     @FXML
     private CalendarTimeTextField heureDebut;
     
     /**
-     * Permet de choisir à quel heure termine le rendez-vous
+     * Permet de choisir à quel heure termine le rendez-vous.
      */
     @FXML
     private CalendarTimeTextField heureFin;
     
     /**
-     * Zone de saisie pour ajouter un commentaire sur le rendez-vous
+     * Zone de saisie pour ajouter un commentaire sur le rendez-vous.
      */
     @FXML
     private TextArea comment;
     
     /**
-     * Zone de Saisie du nom du client  pour le rendez-vous
+     * Zone de Saisie du nom du client pour le rendez-vous.
      */
     @FXML
     private TextField clientRdv;
     /**
-     * Référence de la classe Main
+     * Référence de la classe Main.
      */
     private Main application;
     /**
-     * L'ID du client selectionné
+     * L'ID du client selectionné.
      */
     private int idClient;
     
     /**
     * Est appelée par la classe Main, pour lui passer une référence vers elle même,
-    * cela permet de récuperer certains attributs et méthodes de la classe Main
+    * cela permet de récuperer certains attributs et méthodes de la classe Main.
     * 
     * @param application
-    *          Instance de la classe Main
+    *          Instance de la classe Main.
     *              
     * @see Main
     */
@@ -211,19 +211,19 @@ public class VisiteController implements Initializable {
     
     /**
      * Remplie les label et les textField avec les information du client
-     * et enregistre l'id du client selectionné
+     * et enregistre l'id du client selectionné.
      * 
      * @param client
-     *          Le client selectionné dans la liste
+     *          Le client selectionné dans la liste.
      */
     private void showClientDetails(Client client) {
         if (client != null) {
             nomClient.setText(client.getnomClient());
-            villeClient.setText(client.getaddresse());
+            villeClient.setText(client.getadresse());
             telClient.setText(client.gettel());
             listView.getItems().clear();
             listView.getItems().addAll(client.listVisiteProperty());
-            lieu.setText(client.getaddresse());  
+            lieu.setText(client.getadresse());  
             clientRdv.setText(client.getnomClient());
             this.idClient = client.getId();
         } else {
@@ -238,10 +238,10 @@ public class VisiteController implements Initializable {
     }
     
     /**
-     * Creer un rendez dans la base de données.
-     * Recupere l'utilisateur et verifie si les parametres entrées 
-     * sont valides avant l'insertion dans la bd.
-     * On actualise la liste des rendez-vous apres l'enregistrement du rendez-vous
+     * Créer un rendez dans la base de données.<br>
+     * Récupère l'utilisateur et vérifie si les paramètres entrés 
+     * sont valides avant l'insertion dans la base de données.<br>
+     * On actualise la liste des rendez-vous après l'enregistrement du rendez-vous.
      * 
      * @see Main#loggedUser
      * @see User#setRendezVous(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) 
@@ -306,10 +306,10 @@ public class VisiteController implements Initializable {
     }
     
     /**
-     * Affiche un message d'erreur dans une fenetre de dialogue
+     * Affiche un message d'erreur dans une fenêtre de dialogue.
      * 
      * @param message
-     *             Le message a afficher en cas d'erreur
+     *             Le message à afficher en cas d'erreur.
      */
     private void showAlert(String message){
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -320,7 +320,7 @@ public class VisiteController implements Initializable {
     }
     
     /**
-     * Se deconnecte de l'application 
+     * Se déconnecte de l'application.
      * 
      * @param event
      * @see Main#userLogout() 
@@ -333,7 +333,7 @@ public class VisiteController implements Initializable {
     }
     
     /**
-     * Ferme l'application
+     * Ferme l'application.
      */
     @FXML
     private void handleExit() {

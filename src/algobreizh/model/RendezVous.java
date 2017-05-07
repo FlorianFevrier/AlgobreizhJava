@@ -9,35 +9,44 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * <b>RendezVous est la classe représentant un rendez-vous</b>
+ * <p>RendezVous est la classe représentant un rendez-vous.</p>
  * <p>un rendez-vous est caractérisé par les informations suivantes :</p>
  * <ul>
  * <li>La date du rendez-vous.</li>
- * <li>l'heure à laquel commence le rendez-vous</li>
- * <li>l'heure à laquel se termine un rendez-vous</li>
- * <li>le client avec qui on prend le rendez-vous</li>
+ * <li>l'heure à laquel commence le rendez-vous.</li>
+ * <li>l'heure à laquel se termine un rendez-vous.</li>
+ * <li>le client avec qui on prend le rendez-vous.</li>
  * </ul>
  * 
  * @author florian
  */
 public class RendezVous {
     /**
-    * date, heure, et nom du client d'un rendez-vous
+    * La date du rendez-vous.
     */
     private final StringProperty date;
+    /**
+     * Le nom du client avec qui on prend le rendez-vous.
+     */
     private final StringProperty nomClient;
+    /**
+     * L'heure à laquel commence un rendez-vous.
+     */
     private final StringProperty heureDebut;
+    /**
+     * L'heure à laquel se termine un rendez-vous.
+     */
     private final StringProperty heureFin;
     
     /**
-     * Appele le constructeur suivant
+     * Appele le constructeur suivant.
      */
     public RendezVous(){
        this(null, null, null, null);
     }
     
     /**
-     * Constructeur RendezVous
+     * Constructeur RendezVous.
      * 
      * @param date
      *          La date du rendez-vous
@@ -56,87 +65,84 @@ public class RendezVous {
     }
     
     /**
-     * Retourne la date du rendez-vous
+     * Retourne la date du rendez-vous.
      * 
-     * @return la date du rendez-vous, sous la forme d'une chaine de caractère
+     * @return La date du rendez-vous, sous la forme d'une chaine de caractère.
      */
     public String getDate(){
         return date.get();
     }
     
     /**
-     * Met à jour la date du rendez-vous
+     * Met à jour la date du rendez-vous.
      * 
      * @param date 
-     *          la date du rendez-vous, sous la forme d'une chaine de caractère
+     *          La date du rendez-vous, sous la forme d'une chaine de caractère.
      */
     public void setDate(String date){
         this.date.set(date);
     }
     
     /**
-     * Retourne la date du rendez-vous
+     * Retourne la date du rendez-vous.
      * 
-     * @return la date du rendez-vous, sous la forme d'une StringProperty
+     * @return La date du rendez-vous, sous la forme d'une StringProperty.
      */
     public StringProperty dateProperty(){
         return date;
     }
     
     /**
-     * Retourne le nom du client
+     * Retourne le nom du client.
      * 
-     * @return le nom du client, sous la forme d'une chaine de caractère
+     * @return Le nom du client, sous la forme d'une chaine de caractère.
      */    
     public String getnomClient(){
         return nomClient.get();
     }
     
     /**
-     * Met à jour le nom du client
+     * Met à jour le nom du client.
      * 
      * @param nomClient 
-     *          le nom du client, sous la forme d'une chaine de caractère
+     *          Le nom du client, sous la forme d'une chaine de caractère.
      */    
     public void setnomClient(String nomClient){
         this.nomClient.set(nomClient);
     }
     
     /**
-     * Retourne le nom du client
+     * Retourne le nom du client.
      * 
-     * @return le nom du client, sous la forme d'une StringProperty
+     * @return Le nom du client, sous la forme d'une StringProperty.
      */
     public StringProperty nomClientProperty(){
         return nomClient;
     }
     
     /**
-     * Retourne l'heure à laquel commence le rendez-vous
+     * Retourne l'heure à laquel commence le rendez-vous.
      * 
-     * @return l'heure de début du rendez-vous,
-     *         sous la forme d'une chaine de caractère
+     * @return L'heure de début du rendez-vous, sous la forme d'une chaine de caractère.
      */    
     public String heureDebut(){
         return heureDebut.get();
     }
     
     /**
-     * Met à jour l'heure à laquel commence le rendez-vous
+     * Met à jour l'heure à laquel commence le rendez-vous.
      * 
      * @param heureDebut 
-     *          l'heure de début du rendez-vous,
-     *          sous la forme d'une chaine de caractère
+     *       L'heure de début du rendez-vous, sous la forme d'une chaine de caractère.
      */       
     public void setheureDebut(String heureDebut){
         this.heureDebut.set(heureDebut);
     }
 
     /**
-     * Retourne l'heure à laquel commence le rendez-vous
+     * Retourne l'heure à laquel commence le rendez-vous.
      * 
-     * @return l'heure de début du rendez-vous,
-     *         sous la forme d'une StringProperty
+     * @return L'heure de début du rendez-vous, sous la forme d'une StringProperty.
      */      
     public StringProperty heureDebutProperty(){
         return heureDebut;
@@ -145,29 +151,26 @@ public class RendezVous {
     /**
      * Retourne l'heure à laquel se termine le rendez-vous
      * 
-     * @return l'heure de début du rendez-vous,
-     *         sous la forme d'une chaine de caractère
+     * @return L'heure de début du rendez-vous, sous la forme d'une chaine de caractère.
      */       
     public String heureFin(){
         return heureFin.get();
     }
     
     /**
-     * Met à jour l'heure à laquel se termine le rendez-vous
+     * Met à jour l'heure à laquel se termine le rendez-vous.
      * 
      * @param heureFin 
-     *          l'heure de fin du rendez-vous,
-     *          sous la forme d'une chaine de caractère
+     *          L'heure de fin du rendez-vous, sous la forme d'une chaine de caractère.
      */       
     public void setheureFin(String heureFin){
         this.heureFin.set(heureFin);
     }
 
     /**
-     * Retourne l'heure à laquel se termine le rendez-vous
+     * Retourne l'heure à laquel se termine le rendez-vous.
      * 
-     * @return l'heure de fin du rendez-vous,
-     *         sous la forme d'une StringProperty
+     * @return L'heure de fin du rendez-vous, sous la forme d'une StringProperty.
      */       
     public StringProperty heureFinProperty(){
         return heureFin;

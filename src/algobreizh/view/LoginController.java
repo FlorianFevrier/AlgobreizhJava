@@ -17,26 +17,26 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- * FXML Controller class
- * Le controlleur de la scene login
+ * FXML Controller class,
+ * Le contrôleur de la scene login.
  * 
  * @author florian
  */
 public class LoginController implements Initializable {
     /**
-     * La zone de texte ou l'utilisateur rentre son e-mail
+     * La zone de texte ou l'utilisateur rentre son e-mail.
      */
     @FXML
     TextField userid;
     
     /**
-     * La zone de texte ou l'utilisateur rentre son mot de passe
+     * La zone de texte ou l'utilisateur rentre son mot de passe.
      */
     @FXML
     PasswordField password;
     
     /**
-     * Le bouton qui va appeler la methode processLogin
+     * Le bouton qui va appeler la methode processLogin.
      * 
      * @see LoginController#processLogin(javafx.event.ActionEvent) 
      */
@@ -44,23 +44,23 @@ public class LoginController implements Initializable {
     Button login;
     
     /**
-     * Le Label qui sert a afficher un message en cas d'erreur
+     * Le Label qui sert à afficher un message en cas d'erreur.
      * lors de la connexion
      */
     @FXML
     Label errorMessage;
     
     /**
-     * Référence vers la classe Main
+     * Référence vers la classe Main.
      */
     private Main application;
     
     /**
      * Est appelée par la classe Main, pour lui passer une référence vers elle même,
-     * cela permet de récuperer certains attributs et méthodes de la classe Main
+     * cela permet de récuperer certains attributs et méthodes de la classe Main.
      * 
      * @param application
-     *          Instance de la classe Main
+     *          Instance de la classe Main.
      * 
      * @see Main            
      */
@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
     
     /**
      * Action qui se produit quand on clic sur le bouton login.
-     * Affiche un message d'erreur si les identifiants entrées sont valides
+     * Affiche un message d'erreur si les identifiants sont invalides.
      * 
      * @param event
      * @see Main#userLogging(java.lang.String, java.lang.String)
